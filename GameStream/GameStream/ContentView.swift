@@ -10,26 +10,29 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         
-        ZStack {
-            
-            Spacer()
-            Color(red: 19/255, green: 30/255, blue: 53/255).ignoresSafeArea()
-            VStack{
-                Image("AppLogo").resizable().aspectRatio(contentMode: .fit).frame(width: 250).padding(.bottom, 42)
+        NavigationView {
+            ZStack {
                 
-                inicioYRegistroView()
-                
+                Spacer()
+                Color(red: 19/255, green: 30/255, blue: 53/255).ignoresSafeArea()
+                VStack{
+                    Image("AppLogo").resizable().aspectRatio(contentMode: .fit).frame(width: 250).padding(.bottom, 42)
+                    
+                    inicioYRegistroView()
+                    
+                    
+                    
+                }
                 
                 
             }
-            
-            
-        }
+        }.navigationBarHidden(true)
     }
 }
 
 struct inicioYRegistroView: View{
     @State var tipoInicioSesion = true
+    
     var body: some View{
         VStack{
             HStack {
@@ -68,6 +71,7 @@ struct InicioSesionView: View{
     
     @State var correo = ""
     @State var contrasena = ""
+    
     var body: some View{
         
         
@@ -118,15 +122,16 @@ struct InicioSesionView: View{
                     .foregroundColor(Color("DarkCian"))
                     .padding(.bottom)
                 
-                Button(action: iniciarSesion, label: {
+                
+                NavigationLink(destination: {Home()}, label: {
                     Text("INICIAR SESION")
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding(EdgeInsets(top: 11, leading: 18, bottom: 11, trailing: 18))
                         .overlay(RoundedRectangle(cornerRadius: 6.0).stroke(Color("DarkCian"), lineWidth: 1.5).shadow(color: .white, radius: 4))
-                    
-                })
+                        
+                    })
                 
                 Text("Inicia sesión con redes sociales").foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -159,13 +164,14 @@ struct InicioSesionView: View{
             
         }
         
-        
+
+    
     }
+    
+   
 }
 
-func iniciarSesion() {
-    print("Estoy iniciando sesion")
-}
+
 
 struct RegistroView: View{
     @State var correo = ""
@@ -263,7 +269,7 @@ struct RegistroView: View{
                     })
                 }
                 
-                Text("Registrate con redes sociales").foregroundColor(.white)
+                Text("Regístrate con redes sociales").foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(EdgeInsets(top: 40, leading: 18, bottom: 11, trailing: 18))
                 HStack{
@@ -302,6 +308,29 @@ func tomarFoto() {
 func registrate() {
     print("Te registraste")
 }
+
+struct botonIniciarSesion: View {
+    @State var isPantallaHomeActive = false
+    var body: some View{
+        Button(action: iniciarSesion, label: {
+             Text("INICIAR SESION")
+                 .fontWeight(.bold)
+                 .foregroundColor(.white)
+                 .frame(maxWidth: .infinity, alignment: .center)
+                 .padding(EdgeInsets(top: 11, leading: 18, bottom: 11, trailing: 18))
+                 .overlay(RoundedRectangle(cornerRadius: 6.0).stroke(Color("DarkCian"), lineWidth: 1.5).shadow(color: .white, radius: 4))
+             
+         })
+    }
+    
+    func iniciarSesion() {
+        isPantallaHomeActive = true
+        print(isPantallaHomeActive)
+    }
+    
+}
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
