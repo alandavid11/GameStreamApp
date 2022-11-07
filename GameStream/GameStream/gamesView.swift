@@ -9,7 +9,7 @@ import SwiftUI
 
 struct gamesView: View {
     
-    @ObservedObject var todosLosVideoJuegos = ViewModel()
+    //@ObservedObject var todosLosVideoJuegos = ViewModel()
     
     var body: some View {
         Text("Hola desde gamesView")
