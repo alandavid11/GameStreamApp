@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		92AA5C932914B120003FC48C /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA5C922914B120003FC48C /* Home.swift */; };
+		92AA5C9629189D61003FC48C /* gamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA5C9529189D61003FC48C /* gamesView.swift */; };
+		92AA5C9B2918A362003FC48C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA5C9A2918A362003FC48C /* Model.swift */; };
+		92AA5C9D2918A374003FC48C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA5C9C2918A374003FC48C /* ViewModel.swift */; };
 		92E186872910C9CF00C68BD4 /* GameStreamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E186862910C9CF00C68BD4 /* GameStreamApp.swift */; };
 		92E186892910C9CF00C68BD4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E186882910C9CF00C68BD4 /* ContentView.swift */; };
 		92E1868B2910C9D000C68BD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92E1868A2910C9D000C68BD4 /* Assets.xcassets */; };
@@ -16,6 +19,9 @@
 
 /* Begin PBXFileReference section */
 		92AA5C922914B120003FC48C /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		92AA5C9529189D61003FC48C /* gamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gamesView.swift; sourceTree = "<group>"; };
+		92AA5C9A2918A362003FC48C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		92AA5C9C2918A374003FC48C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		92E186832910C9CF00C68BD4 /* GameStream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameStream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92E186862910C9CF00C68BD4 /* GameStreamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStreamApp.swift; sourceTree = "<group>"; };
 		92E186882910C9CF00C68BD4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -34,6 +40,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		92AA5C972918A2A8003FC48C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				92AA5C992918A33E003FC48C /* ViewModels */,
+				92AA5C982918A30E003FC48C /* Models */,
+				92E186882910C9CF00C68BD4 /* ContentView.swift */,
+				92E186862910C9CF00C68BD4 /* GameStreamApp.swift */,
+				92AA5C922914B120003FC48C /* Home.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		92AA5C982918A30E003FC48C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				92AA5C9A2918A362003FC48C /* Model.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		92AA5C992918A33E003FC48C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				92AA5C9C2918A374003FC48C /* ViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		92E1867A2910C9CF00C68BD4 = {
 			isa = PBXGroup;
 			children = (
@@ -53,11 +87,10 @@
 		92E186852910C9CF00C68BD4 /* GameStream */ = {
 			isa = PBXGroup;
 			children = (
-				92AA5C922914B120003FC48C /* Home.swift */,
-				92E186862910C9CF00C68BD4 /* GameStreamApp.swift */,
-				92E186882910C9CF00C68BD4 /* ContentView.swift */,
+				92AA5C972918A2A8003FC48C /* Views */,
 				92E1868A2910C9D000C68BD4 /* Assets.xcassets */,
 				92E1868C2910C9D000C68BD4 /* Preview Content */,
+				92AA5C9529189D61003FC48C /* gamesView.swift */,
 			);
 			path = GameStream;
 			sourceTree = "<group>";
@@ -140,8 +173,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92AA5C9B2918A362003FC48C /* Model.swift in Sources */,
 				92E186892910C9CF00C68BD4 /* ContentView.swift in Sources */,
 				92AA5C932914B120003FC48C /* Home.swift in Sources */,
+				92AA5C9629189D61003FC48C /* gamesView.swift in Sources */,
+				92AA5C9D2918A374003FC48C /* ViewModel.swift in Sources */,
 				92E186872910C9CF00C68BD4 /* GameStreamApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
