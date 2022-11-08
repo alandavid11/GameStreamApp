@@ -15,7 +15,7 @@ struct Games: Codable{
 }
 
 
-struct Game: Codable {
+struct Game: Codable, Hashable {
     
     
     var title:String
@@ -30,7 +30,7 @@ struct Game: Codable {
     
 }
 
-struct videoUrl: Codable {
+struct videoUrl: Codable, Hashable {
     var mobile:String
     var tablet:String
 }
