@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct gameView: View {
     
@@ -19,12 +20,107 @@ struct gameView: View {
      var imgsUrl: [String]
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        
+        ZStack {
+            
+            Color("marine").ignoresSafeArea()
+            
+            
+            VStack {
+                
+                video(url: url).frame(height: 300)
+                ScrollView {
+                    // Informacion video
+                    videoinfo(titulo: titulo, studio: studio, calificacion: calificacion, anoPublicacion: anoPublicacion, descripcion: descripcion, tags: tags)
+                        .padding(.bottom)
+                }.frame(maxWidth: .infinity)
+            }
+            
+            
+        }
+        
+        
     }
 }
 
-//struct gameView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        gameView()
-//    }
-//}
+struct video:View{
+    
+    var url:String
+    var body: some View{
+        
+        VideoPlayer(player: AVPlayer(url: URL(string: url)!)).ignoresSafeArea()
+    }
+}
+
+struct videoinfo:View{
+    
+    var titulo:String
+    var studio:String
+    var calificacion:String
+    var anoPublicacion:String
+    var descripcion:String
+    var tags:[String]
+    
+    var body: some View{
+        
+        VStack(alignment: .leading){
+            
+            Text("\(titulo)")
+                .foregroundColor(.white)
+                .font(.largeTitle)
+                .padding(.leading)
+            
+            HStack{
+                Text("\(studio)")
+                    .foregroundColor(.white)
+                    .font(.subheadline)
+                    .padding(.top, 5)
+                    .padding(.leading)
+                
+                Text("\(calificacion)")
+                    .foregroundColor(.white)
+                    .font(.subheadline)
+                    .padding(.top, 5)
+                
+                Text("\(anoPublicacion)")
+                    .foregroundColor(.white)
+                    .font(.subheadline)
+                    .padding(.top, 5)
+            }
+            
+            Text("\(descripcion)")
+                .foregroundColor(.white)
+                .font(.subheadline)
+                .padding(.top, 5)
+                .padding(.leading)
+            
+            HStack{
+                ForEach(tags, id: \.self){
+                    tag in
+                    Text("#\(tag)")
+                        .foregroundColor(.white)
+                        .font(.subheadline)
+                        .padding(.top, 4)
+                        .padding(.leading)
+                }
+            }
+            
+        }.frame(maxWidth: .infinity,alignment: .leading)
+        
+    }
+}
+
+struct gameView_Previews: PreviewProvider {
+    static var previews: some View {
+        gameView(
+            url: "ejemplo",titulo:"Sonic The Hedgehog",
+            studio: "Sega",
+            calificacion: "E+",
+            anoPublicacion: "1991",
+            descripcion: "Juego de Sega Genesis publicado en 1991 con más de 40 millones de copias vendidas actualmente",
+            tags:["plataformas","mascota"],
+            imgsUrl: [ "https://cdn.cloudflare.steamstatic.com/steam/apps/268910/ss_615455299355eaf552c638c7ea5b24a8b46e02dd.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/268910/ss_615455299355eaf552c638c7ea5b24a8b46e02dd.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/268910/ss_615455299355eaf552c638c7ea5b24a8b46e02dd.600x338.jpg"
+        ])
+    }
+}

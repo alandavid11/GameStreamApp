@@ -57,22 +57,7 @@ struct gamesView: View {
                         
                         ForEach(todosLosVideoJuegos.gamesInfo,id: \.self){
                             juego in
-                            
-                            
-                            
-                            Button(action: {
-                                url = juego.videosUrls.mobile
-                                titulo = juego.title
-                                studio = juego.studio
-                                calificacion = juego.contentRaiting
-                                anoPublicacion = juego.publicationYear
-                                descripcion = juego.description
-                                tags = juego.tags
-                                imgsUrl = juego.galleryImages
-                                print("pulse el juego \(titulo)")
-                                gameViewIsActive = true
-                                
-                            }, label: {
+                            NavigationLink(destination: gameView(url: juego.videosUrls.mobile, titulo: juego.title, studio: juego.studio, calificacion: juego.contentRaiting, anoPublicacion: juego.publicationYear, descripcion: juego.description, tags: juego.tags, imgsUrl: juego.galleryImages), label: {
                                 VStack
                                 {
                                     AsyncImage( url: URL( string: juego.galleryImages[0] )!  )
@@ -82,20 +67,21 @@ struct gamesView: View {
                                             .aspectRatio(contentMode: .fit)
                                             .clipShape(RoundedRectangle(cornerRadius: 11))
                                             .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                                            
+
                                     } placeholder: {
                                         placeholderImage()
                                     }
-                                    
-                                    
+
+
                                     Text("\(juego.title)").foregroundColor(.white)
                                         .font(.body)
                                         .padding(EdgeInsets(top: 1, leading: 0, bottom: 15, trailing: 0))
-                                        
-                                    
+
+
                                 }
-                                
+
                             })
+                            
                         }
                         
                     }
