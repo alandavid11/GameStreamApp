@@ -10,6 +10,7 @@ import SwiftUI
 struct ProfileView: View {
     
     @State var nombreUsuariotest = "Lorem"
+    @State var imagenPerfil:UIImage = UIImage(named: "picture")!
     
     var body: some View {
         
@@ -26,7 +27,7 @@ struct ProfileView: View {
                 
                 VStack{
                     
-                    Image("picture")
+                    Image(uiImage: imagenPerfil)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 118, height: 118)
@@ -49,6 +50,11 @@ struct ProfileView: View {
             .navigationBarBackButtonHidden(true)
         .onAppear(
             perform: {
+                
+                if returnUIImage(named: "fotoperfil") != nil {
+                    imagenPerfil = returnUIImage(named: "fotoperfil")!
+                }
+                
                 if UserDefaults.standard.object(forKey: "datosUsuario") != nil{
                     nombreUsuariotest = UserDefaults.standard.stringArray(forKey: "datosUsuario")![2]
                 }
@@ -58,9 +64,15 @@ struct ProfileView: View {
         
     }
     
-//    func returnUIImage(named:String) -> UIImage? {
-//        
-//    }
+    func returnUIImage(named:String) -> UIImage? {
+        
+        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false){
+            
+            return UIImage(contentsOfFile: URL(filePath: dir.absoluteString).appendingPathComponent(named).path)
+        }
+        return nil
+        
+    }
 }
 
 struct moduloAjustes: View{

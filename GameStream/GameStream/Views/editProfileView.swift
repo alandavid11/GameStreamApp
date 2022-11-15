@@ -34,6 +34,7 @@ struct editProfileView: View {
                                 .frame(width: 118, height: 118)
                                 .clipShape(Circle())
                         }
+                        
 
                         PhotosPicker(selection: $selectedItem,
                             matching: .images,
@@ -45,6 +46,14 @@ struct editProfileView: View {
                             newItem in Task{
                                 if let data = try? await newItem?.loadTransferable(type: Data.self){
                                     selectedImageData = data
+                                    let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                                    let url = documents.appendingPathComponent("fotoperfil.png")
+                                    do{
+                                        try selectedImageData?.write(to: url)
+                                    }catch{
+                                        print("No se pudo cambiar la fotografia, se produjo el error \(error)")
+                                    }
+                                    
                                 }
                             }
                         }

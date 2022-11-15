@@ -209,7 +209,7 @@ struct RegistroView: View{
     @State var contrasena = ""
     @State var confirmarContrasena = ""
     @State var isPantallaHomeActive = false
-    @State var contrasenaIsNotConfirmed = true
+    @State var contrasenaIsNotConfirmed = false
     @State var nombre = ""
     
     
