@@ -12,6 +12,8 @@ struct editProfileView: View {
     
     @State var selectedItem: PhotosPickerItem? = nil
     @State var selectedImageData: Data? = nil
+    @State var imagenPerfil:UIImage = UIImage(named: "picture")!
+    
     var body: some View {
         ZStack {
             Color("marine").ignoresSafeArea()
@@ -22,7 +24,7 @@ struct editProfileView: View {
                     
                     
                     ZStack {
-                        Image("defaultusr")
+                        Image(uiImage: imagenPerfil)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 118, height: 118)
@@ -67,7 +69,21 @@ struct editProfileView: View {
             
             
             
+        }.onAppear(perform: {
+            if returnUIImage(named: "fotoperfil") != nil {
+                imagenPerfil = returnUIImage(named: "fotoperfil")!
+            }
+        })
+    }
+    
+    func returnUIImage(named:String) -> UIImage? {
+        
+        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false){
+            
+            return UIImage(contentsOfFile: URL(filePath: dir.absoluteString).appendingPathComponent(named).path)
         }
+        return nil
+        
     }
 }
 
@@ -76,6 +92,7 @@ struct moduloEditar: View{
     @State var correo:String = ""
     @State var contrasena:String = ""
     @State var nombre:String = ""
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View{
         VStack(alignment: .leading) {
@@ -162,7 +179,7 @@ struct moduloEditar: View{
         let objetoActulizadorDatos = SaveData()
         let resultado = objetoActulizadorDatos.guardarDatos(correo: correo, contrasena: contrasena, nombre: nombre)
         print("se guardaron los datos con exito? \(resultado)")
-        
+        dismiss()
     }
     
 }

@@ -211,11 +211,12 @@ struct RegistroView: View{
     @State var isPantallaHomeActive = false
     @State var contrasenaIsNotConfirmed = false
     @State var nombre = ""
+    @State private var path = NavigationPath()
     
     
     var body: some View{
         ScrollView {
-            NavigationStack{
+            NavigationStack(path: $path){
                 VStack(alignment: .center){
                     Text("Elije una foto de perfil")
                         .fontWeight(.bold)
@@ -325,8 +326,7 @@ struct RegistroView: View{
                         .alert(isPresented: $contrasenaIsNotConfirmed, content:
                                     {
                                         Alert(title: Text("Error"), message: Text("La contraseña no coincide. Confirma tu contraseña"), dismissButton: .default(Text("Entendido")))
-                                    }
-                                         )
+                                    })
                         
                     }
                     
@@ -383,10 +383,7 @@ func tomarFoto() {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-        
-        Image("pantalla1").resizable().ignoresSafeArea()
-        Image("pantalla2").resizable().ignoresSafeArea()
+        ContentView() 
         
     }
 }

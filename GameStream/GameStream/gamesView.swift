@@ -92,8 +92,7 @@ struct gamesView: View {
                 
             }.padding(.horizontal, 6)
             
-        }.toolbar(.hidden)
-                .navigationBarBackButtonHidden(true)
+        }   
                
             
             

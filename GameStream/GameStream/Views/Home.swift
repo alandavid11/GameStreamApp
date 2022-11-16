@@ -149,9 +149,28 @@ struct subModuloHome: View {
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         .padding(.top)
                         
-                    
+//                ForEach(juegoEncontrado.gameInfo, id: \.self){
+//                    juego in
+//                    NavigationLink(destination: gameView(url: juego.videosUrls.mobile, titulo: juego.title, studio: juego.studio, calificacion: juego.contentRaiting, anoPublicacion: juego.publicationYear, descripcion: juego.description, tags: juego.tags, imgsUrl: juego.galleryImages), label: {
+//
+//                        ZStack {
+//                            VStack(spacing: 0) {
+//
+//                                Image("The Witcher 3").resizable().scaledToFill()
+//                                Text("The Witcher 3")
+//                                    .foregroundColor(.white)
+//                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+//                                    .background(Color("lightblue"))
+//                            }
+//
+//                            Image(systemName: "play.circle.fill")
+//                                .resizable()
+//                                .foregroundColor(.white)
+//                                .frame(width: 42, height: 42)
+//                        } }
+//                    )}
                 Button(action: {watchGame(name: "The Witcher 3")} , label: {
-                        
+
                     ZStack {
                         VStack(spacing: 0) {
 
@@ -167,8 +186,8 @@ struct subModuloHome: View {
                             .foregroundColor(.white)
                             .frame(width: 42, height: 42)
                     }
-                    
-                        
+
+
                 })
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
                     .padding(.vertical)
@@ -280,7 +299,7 @@ struct subModuloHome: View {
                     HStack{
                        
                         
-                        
+                       
                             Button(action: {watchGame(name: "Cuphead")} , label: {
                                     
                                         Image("cuphead")
@@ -298,6 +317,7 @@ struct subModuloHome: View {
                                         .frame(width: 240, height: 135)
                                 
                         }).navigationDestination(isPresented: $isGameViewActive)  {gameView(url: urlhome, titulo: titulo, studio: studio, calificacion: calificacion, anoPublicacion: anoPublicacion, descripcion: descripcion, tags: tags, imgsUrl: imgsUrl)}
+                        
                         
                     }
                     
@@ -333,7 +353,7 @@ struct subModuloHome: View {
             descripcion = juegoEncontrado.gameInfo[0].description
             tags = juegoEncontrado.gameInfo[0].tags
             imgsUrl = juegoEncontrado.gameInfo[0].galleryImages
-        
+                
                 print(isGameViewActive)
                 print(urlhome)
               
