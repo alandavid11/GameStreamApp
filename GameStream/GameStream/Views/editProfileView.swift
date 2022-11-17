@@ -22,12 +22,18 @@ struct editProfileView: View {
             ScrollView {
                 VStack {
                     
+                    Text("Editar perfil")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.white)
+                        .frame(minWidth: 0, idealWidth: 100,maxWidth: .infinity,alignment: .center)
+                        .padding()
                     
                     ZStack {
                         Image(uiImage: imagenPerfil)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 118, height: 118)
+                            .frame(width: 108, height: 108)
                             .clipShape(Circle())
                         if let selectedImageData, let uiImage = UIImage(data: selectedImageData){
                             Image(uiImage: uiImage)

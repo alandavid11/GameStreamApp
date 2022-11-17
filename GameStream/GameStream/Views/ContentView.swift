@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct ContentView: View {
     var body: some View {
@@ -89,7 +90,6 @@ struct InicioSesionView: View{
         
         ScrollView {
             
-            
             NavigationStack {
                 VStack(alignment: .leading) {
                     Text("Correo electrónico")
@@ -148,6 +148,7 @@ struct InicioSesionView: View{
                         .alert(isPresented: $ifNotUserFound, content: {
                             Alert(title: Text("Error"), message: Text("No se encontró ningún usuario o la contraseña es incorrecta"), dismissButton: .default(Text("Entendido")))
                         })
+                   
                     
                     Text("Inicia sesión con redes sociales").foregroundColor(.white)
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -211,12 +212,14 @@ struct RegistroView: View{
     @State var isPantallaHomeActive = false
     @State var contrasenaIsNotConfirmed = false
     @State var nombre = ""
-    @State private var path = NavigationPath()
+    @State var selectedItem: PhotosPickerItem? = nil
+    @State var selectedImageData: Data? = nil
+    @State var imagenPerfil:UIImage = UIImage(named: "picture")!
     
     
     var body: some View{
         ScrollView {
-            NavigationStack(path: $path){
+            NavigationStack{
                 VStack(alignment: .center){
                     Text("Elije una foto de perfil")
                         .fontWeight(.bold)
@@ -226,15 +229,43 @@ struct RegistroView: View{
                         .fontWeight(.light)
                         .foregroundColor(Color("lightgray"))
                         .padding(.bottom)
+                    ZStack{
+                    Image(uiImage: imagenPerfil)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 108, height: 108)
+                        .clipShape(Circle())
+                    if let selectedImageData, let uiImage = UIImage(data: selectedImageData){
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 118, height: 118)
+                            .clipShape(Circle())
+                    }
                     
-                    Button(action:tomarFoto, label: {
-                        ZStack{
-                            Image("picture")
-                            Image(systemName: "camera")
-                                .foregroundColor(.white)
+                    
+                    PhotosPicker(selection: $selectedItem,
+                                 matching: .images,
+                                 photoLibrary: .shared()){
+                        Image(systemName: "camera")
+                            .frame(width: 118, height: 118)
+                            .foregroundColor(.white)
+                    }.onChange(of: selectedItem){
+                        newItem in Task{
+                            if let data = try? await newItem?.loadTransferable(type: Data.self){
+                                selectedImageData = data
+                                let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                                let url = documents.appendingPathComponent("fotoperfil.png")
+                                do{
+                                    try selectedImageData?.write(to: url)
+                                }catch{
+                                    print("No se pudo cambiar la fotografia, se produjo el error \(error)")
+                                }
+                                
+                            }
                         }
-                    })
-                    
+                    }
+                }
                 }
                 
                 VStack{
@@ -244,7 +275,7 @@ struct RegistroView: View{
                         
                         ZStack(alignment: .leading){
                             if nombre.isEmpty{
-                                Text(verbatim:"Damon Barlow")
+                                Text(verbatim:"Escribe tu nombre")
                                     .font(.caption).foregroundColor(Color("lightgray"))
                             }
                             
@@ -359,8 +390,11 @@ struct RegistroView: View{
                 
                 
             }
-        }
-    }
+        }.onAppear(perform: {
+            if returnUIImage(named: "fotoperfil") != nil {
+                imagenPerfil = returnUIImage(named: "fotoperfil")!
+            }
+        })    }
     func registrate() {
         if contrasena != confirmarContrasena{
             contrasenaIsNotConfirmed = true
@@ -372,6 +406,17 @@ struct RegistroView: View{
             print("Se guardaron con exito los datos : \(resultado)")
         }
     }
+    
+    func returnUIImage(named:String) -> UIImage? {
+        
+        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false){
+            
+            return UIImage(contentsOfFile: URL(filePath: dir.absoluteString).appendingPathComponent(named).path)
+        }
+        return nil
+        
+    }
+    
 }
 
 func tomarFoto() {
